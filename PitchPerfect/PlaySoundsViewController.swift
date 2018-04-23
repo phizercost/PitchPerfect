@@ -6,6 +6,7 @@
 //  Copyright © 2018 Phizer Cost. All rights reserved.
 //
 
+//This class uses the functions ConfigureUI(), stopAudio(), playSound() and setupAudio() which are provided by the extension PlaySoubdsViewController+Audio provided in the course.
 import UIKit
 import AVFoundation
 
