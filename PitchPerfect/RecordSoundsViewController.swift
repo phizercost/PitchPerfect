@@ -51,6 +51,8 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        startButton.imageView?.contentMode = .scaleAspectFit
+        stopButton.imageView?.contentMode = .scaleAspectFit
         configureUIRecording(state: false)
     }
     
@@ -58,20 +60,15 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         if flag {
         performSegue(withIdentifier: "stopRecording", sender: audioRecorder.url)
         } else {
-            print ("Recording not successfull")
+            let alertController = UIAlertController(title: "Alert", message:"Recording failed", preferredStyle: .alert)
+            self.present(alertController, animated: true, completion: nil)
         }
         
     }
     func configureUIRecording (state: Bool) {
-        if state {
-            startButton.isEnabled = false
-            stopButton.isEnabled = true
-            recordingLabel.text = "Recording in Progress"
-        } else {
-            startButton.isEnabled = true
-            stopButton.isEnabled = false
-            recordingLabel.text = "Start Recording"
-        }
+        startButton.isEnabled = !state
+        stopButton.isEnabled = state
+        recordingLabel.text = state ? "Recording in Progress" : "Start Recording"
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "stopRecording" {
